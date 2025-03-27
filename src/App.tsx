@@ -13,16 +13,16 @@ export const App: React.FC = () => {
   const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all');
   const [errorType, setErrorType] = useState<string | null>(null);
 
-  if (!USER_ID) {
-    return <UserWarning />;
-  }
-
   const handleError = (type: string) => {
     setErrorType(type);
     setTimeout(() => setErrorType(null), 3000);
   };
 
   useEffect(() => {
+    if (!USER_ID) {
+      return <UserWarning />;
+    }
+
     getTodos()
       .then(data => setTodo(Array.isArray(data) ? data : []))
       .catch(() => {
