@@ -1,15 +1,16 @@
 import { Todo } from '../types/Todo';
 type Props = {
   tod: Todo;
-  delitePost: (id: number) => void;
+  handleRemoveTodo: (id: number) => void;
 };
 
-export const TodoItem: React.FC<Props> = ({ tod, delitePost }) => {
+export const TodoItem: React.FC<Props> = ({ tod: { id, title, completed },
+  handleRemoveTodo}) => {
   return (
     <div
       data-cy="Todo"
-      className={tod.completed ? 'todo completed' : 'todo'}
-      key={tod.id}
+      className={completed ? 'todo completed' : 'todo'}
+      key={id}
     >
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label className="todo__status-label">
@@ -17,20 +18,20 @@ export const TodoItem: React.FC<Props> = ({ tod, delitePost }) => {
           data-cy="TodoStatus"
           type="checkbox"
           className="todo__status"
-          checked={tod.completed}
+          checked={completed}
           onChange={() => {}}
         />
       </label>
 
       <span data-cy="TodoTitle" className="todo__title">
-        {tod.title}
+        {title}
       </span>
       <button
         type="button"
         className="todo__remove"
         data-cy="TodoDelete"
         onClick={() => {
-          delitePost(tod.id);
+          handleRemoveTodo(id);
         }}
       >
         ×

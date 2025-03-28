@@ -46,7 +46,7 @@ export const App: React.FC = () => {
     }
   };
 
-  const delitePost = (todoId: number) => {
+  const handleRemoveTodo = (todoId: number) => {
     delTodos(todoId).then(() => {
       setTodo(currentTodos =>
         Array.isArray(currentTodos)
@@ -62,7 +62,7 @@ export const App: React.FC = () => {
 
       <div className="todoapp__content">
         {<TodoHeader isInput={isInput} setIsInput={setIsInput} />}
-        {<TodoList getFilter={getFilter} delitePost={delitePost} />}
+        {<TodoList getFilter={getFilter} handleRemoveTodo={handleRemoveTodo} />}
 
         {/* Hide the footer if there are no todos */}
         {isTodo.length > 0 && (
